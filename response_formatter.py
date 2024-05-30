@@ -52,18 +52,18 @@ def response_text_formatter(raw_text):
         text_block = sections[i + 1].strip()
         sections_dict[heading] = text_block
     # Formatting the text in the keys and values
-    keys_list = []
-    values_list = []
-    new_dict = {}
-    for key, value in sections_dict.items():
-        new_key = key.replace("**", "")
-        keys_list.append(new_key)
+    if sections_dict.items().is_empty() == False:
+        keys_list = []
+        values_list = []
+        for key, value in sections_dict.items():
+            new_key = key.replace("**", "")
+            keys_list.append(new_key)
 
-        new_value = value.replace("**", "")
-        new_value = value.replace("*", "")
-        values_list.append([new_value])
+            new_value = value.replace("**", "")
+            new_value = value.replace("*", "")
+            values_list.append([new_value])
 
-    final_dict = dict(zip(keys_list, values_list))
-    return (final_dict)
+        final_dict = dict(zip(keys_list, values_list))
+        return (final_dict)
 
 print(response_text_formatter(input_text).keys())
